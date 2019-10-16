@@ -5,7 +5,7 @@
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Tasks List</ion-title>
+    <ion-title>Departure Stations</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -26,8 +26,29 @@
     Please create your first task.
   </div>
 </ion-content>
+
+<!-- <ion-content>
+  <ion-searchbar (ionInput)="getStations($event)"></ion-searchbar>
+      <ion-list>
+        <ion-item *ngFor="let station of stations">
+            {{ station }}
+        </ion-item>
+      </ion-list>
+</ion-content> -->
+
+<ion-content>
+    <ion-searchbar (ionInput)="getStations($event)"></ion-searchbar>
+        <ion-list>
+          <ion-item *ngFor="let state of states">
+              {{ states }}
+          </ion-item>
+        </ion-list>
+  </ion-content>
+
+
 <ion-footer (click)="logout()">
   <ion-toolbar color="medium">
     <ion-title>Log out</ion-title>
   </ion-toolbar>
 </ion-footer>
+

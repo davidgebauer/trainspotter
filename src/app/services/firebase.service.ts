@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { resolve } from 'path';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class FirebaseService {
 
   private snapshotChangesSubscription: any;
+  private firestore: any;
 
   constructor(
     public afs: AngularFirestore,
@@ -114,5 +116,25 @@ export class FirebaseService {
       })
     })
   }
+
+getStationCategories(){
+/*   return this.snapshotChangesSubscription.collection('States').snapshotChanges();
+ */
+  return new Promise<string>((resolve, reject) => {
+    this.snapshotChangesSubscription = this.afs.collection('States').snapshotChanges();
+    resolve(this.snapshotChangesSubscription);
+  }
+  )}
+
 }
 
+/* getTasks(){
+  return new Promise<any>((resolve, reject) => {
+    this.afAuth.user.subscribe(currentUser => {
+      if(currentUser){
+        this.snapshotChangesSubscription = this.afs.collection('people').doc(currentUser.uid).collection('tasks').snapshotChanges();
+        resolve(this.snapshotChangesSubscription);
+      }
+    })
+  })
+} */
