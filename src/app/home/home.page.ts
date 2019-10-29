@@ -4,6 +4,8 @@ import { LoadingController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../services/firebase.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import {} from 'jasmine';
+
 
 @Component({
   selector: 'app-home',
@@ -17,6 +19,7 @@ export class HomePage implements OnInit {
   states: Array<string>;
   private snapshotChangesSubscription: any;
 
+
   constructor(
     public loadingCtrl: LoadingController,
     private authService: AuthService,
@@ -26,7 +29,7 @@ export class HomePage implements OnInit {
     public afs: AngularFirestore,
 
   ) { 
-    //this.initializeItems();
+    this.initializeItems();
     this.initializeStates();
 
   }
@@ -65,7 +68,7 @@ export class HomePage implements OnInit {
   }
 
 initializeItems() {
-    this.stations = [
+    this.items = [
       'Atlanta',
       'Austin',
       'Baltimore',
@@ -89,13 +92,13 @@ initializeItems() {
     return new Promise<any>((resolve, reject) => {
       this.snapshotChangesSubscription = this.afs.collection('States').snapshotChanges();
       resolve(this.snapshotChangesSubscription);
-      
+
     })
   }
 
-  getStates(ev: any){
+ /*  getStates(ev: any){
     this.firebaseService.getStationCategories();
-  }
+  } */
 
   getStations(ev: any) {
     // Reset items back to all of the items
@@ -113,4 +116,20 @@ initializeItems() {
     }
 
 }
+
+getItems(ev: any) {
+  // Reset items back to all of the items
+  this.initializeItems();
+
+  // set val to the value of the searchbar
+  const val = ev.target.value;
+
+  // if the value is an empty string don't filter the items
+  if (val && val.trim() != '') {
+    this.items = this.items.filter((item) => {
+      return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+    })
+  }
+}
+
 }

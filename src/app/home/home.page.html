@@ -23,27 +23,27 @@
     </ion-list>
   </div>
   <div *ngIf="items.length == 0" class="empty-list">
-    Please create your first task.
+    Your station could not be found.
   </div>
 </ion-content>
-
-<!-- <ion-content>
-  <ion-searchbar (ionInput)="getStations($event)"></ion-searchbar>
-      <ion-list>
-        <ion-item *ngFor="let station of stations">
-            {{ station }}
-        </ion-item>
-      </ion-list>
-</ion-content> -->
 
 <ion-content>
     <ion-searchbar (ionInput)="getStations($event)"></ion-searchbar>
         <ion-list>
-          <ion-item *ngFor="let state of states">
-              {{ states }}
+          <ion-item *ngFor="let station of stations">
+              {{ station }}
           </ion-item>
         </ion-list>
   </ion-content>
+
+  <ion-content>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+        <ion-list>
+          <ion-item *ngFor="let item of items">
+              {{ item }}
+          </ion-item>
+        </ion-list>
+</ion-content>
 
 
 <ion-footer (click)="logout()">

@@ -3,7 +3,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { resolve } from 'path';
+// import { resolve } from 'path';
+import {} from 'jasmine';
+
 
 @Injectable({
   providedIn: 'root'
@@ -117,16 +119,14 @@ export class FirebaseService {
     })
   }
 
-getStationCategories(){
-/*   return this.snapshotChangesSubscription.collection('States').snapshotChanges();
- */
-  return new Promise<string>((resolve, reject) => {
+/* getStationCategories(){
+  return new Promise<any>((resolve, reject) => {
     this.snapshotChangesSubscription = this.afs.collection('States').snapshotChanges();
     resolve(this.snapshotChangesSubscription);
   }
   )}
 
-}
+} */
 
 /* getTasks(){
   return new Promise<any>((resolve, reject) => {
@@ -137,4 +137,5 @@ getStationCategories(){
       }
     })
   })
-} */
+}  */
+}
