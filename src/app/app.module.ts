@@ -19,6 +19,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import * as firebase from 'firebase';
 // import { NewTaskModalPage } from './new-task-modal/new-task-modal.page';
 
 
@@ -48,3 +49,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+// Set the configuration for your app
+// TODO: Replace with your project's config object
+var config = {
+  apiKey: "AIzaSyBvJ0ZWfd2GcIpKgdcIaZKJ6ohLW_E7DOs",
+  authDomain: "fir-storage-login.firebaseapp.com",
+  databaseURL: "https://fir-storage-login.firebaseio.com",
+  projectId: "firebase-storage-login",
+  storageBucket: "firebase-storage-login.appspot.com",
+  messagingSenderId: "803036592201"
+};
+var app = firebase.initializeApp(config);
+
+// Get a reference to the database service
+var database = firebase.database(app);

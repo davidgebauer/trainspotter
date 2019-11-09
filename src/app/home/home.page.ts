@@ -5,6 +5,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../services/firebase.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {} from 'jasmine';
+import { Observable } from 'rxjs';
+//import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+//import { resolve } from 'dns';
+import { AppModule } from '../app.module';
 
 
 @Component({
@@ -16,9 +21,8 @@ export class HomePage implements OnInit {
 
   items: Array<any>;
   stations: Array<string>;
-  states: Array<string>;
+  USstates: Array<any>;
   private snapshotChangesSubscription: any;
-
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -68,7 +72,7 @@ export class HomePage implements OnInit {
   }
 
 initializeItems() {
-    this.items = [
+     this.items = [
       'Atlanta',
       'Austin',
       'Baltimore',
@@ -86,15 +90,61 @@ initializeItems() {
       'San Francisco',
       'Seattle',
       'Washington',
-    ]
-  }
-  initializeStates(){
+    ] 
+    }
+
+/*   initializeStates(){
     return new Promise<any>((resolve, reject) => {
-      this.snapshotChangesSubscription = this.afs.collection('States').snapshotChanges();
-      resolve(this.snapshotChangesSubscription);
+      this.stations = this.afs.collection('States').snapshotChanges();
+      resolve(this.stations);
 
     })
-  }
+  } */
+
+  initializeStates(){
+    
+    this.firebaseService.getStates()
+    .then(states => {
+      this.USstates = states;
+      //alert(this.USstates); ---> says [object Object]
+
+    })
+    
+      //this.afs.collection<any>('States',ref=>ref.where(, '==', 1)); 
+      //.snapshotChanges();
+      //resolve(this.stations);
+
+/*       return firebase.database().ref('States').once('value').then(function(snapshot){
+        this.states = (snapshot.val());
+        alert((snapshot.val())); 
+      }); */
+
+/*       return firebase.database().ref('States').once('value').then(snapshot => snapshot.val());{
+        this.states
+      }
+ */
+/*          let citiesRef = firebase.database.collection('States');
+        this.states = citiesRef.get()
+          .then(snapshot => {
+            snapshot.forEach(doc => {
+              console.log(doc.id, '=>', doc.data());
+            });
+          })
+          .catch(err => {
+            console.log('Error getting documents', err);
+          }); */
+
+          /* db.collection("States").get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                //this.states
+            }); */
+ 
+
+      };
+
+
 
  /*  getStates(ev: any){
     this.firebaseService.getStationCategories();
@@ -109,13 +159,13 @@ initializeItems() {
     const val = ev.target.value;
 
     // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.stations = this.stations.filter((station) => {
-        return (station.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+     if (val && val.trim() != '') {
+      this.USstates = this.USstates.filter((USstates) => {
+        return (USstates.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      }) 
     }
+  }
 
-}
 
 getItems(ev: any) {
   // Reset items back to all of the items
@@ -131,5 +181,4 @@ getItems(ev: any) {
     })
   }
 }
-
 }

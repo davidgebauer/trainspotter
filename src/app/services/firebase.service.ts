@@ -119,6 +119,16 @@ export class FirebaseService {
     })
   }
 
+  getStates(){
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.user.subscribe(currentUser => {
+        if(currentUser){
+          this.snapshotChangesSubscription = this.afs.collection('States').snapshotChanges();
+          resolve(this.snapshotChangesSubscription);
+        }
+      })
+    })
+  }
 /* getStationCategories(){
   return new Promise<any>((resolve, reject) => {
     this.snapshotChangesSubscription = this.afs.collection('States').snapshotChanges();
