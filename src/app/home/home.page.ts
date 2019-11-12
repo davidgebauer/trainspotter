@@ -6,7 +6,6 @@ import { FirebaseService } from '../services/firebase.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {} from 'jasmine';
 import { Observable } from 'rxjs';
-//import * as firebase from 'firebase';
 import * as firebase from 'firebase/app';
 //import { resolve } from 'dns';
 import { AppModule } from '../app.module';
@@ -102,11 +101,14 @@ initializeItems() {
   } */
 
   initializeStates(){
-    
-    this.firebaseService.getStates()
-    .then(states => {
+
+    this.firebaseService.getStates().then(states => {
       this.USstates = states;
-      //alert(this.USstates); ---> says [object Object]
+      alert(this.USstates[1].value);
+      alert(this.USstates);
+      console.log(this.USstates[1].value);
+      console.log(this.USstates);
+      //---> says [object Object]
 
     })
     

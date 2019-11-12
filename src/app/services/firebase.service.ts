@@ -120,19 +120,21 @@ export class FirebaseService {
   }
 
   getStates(){
-    return new Promise<any>((resolve, reject) => {
+    
+     return new Promise<any>((resolve, reject) => {
       this.afAuth.user.subscribe(currentUser => {
         if(currentUser){
-          this.snapshotChangesSubscription = this.afs.collection('States').snapshotChanges();
+          //return this.afs.collection('States')
+          this.snapshotChangesSubscription = this.afs.collection('States').doc(currentUser.uid).snapshotChanges();
           resolve(this.snapshotChangesSubscription);
         }
-      })
-    })
+     }) //reject(alert('REJECTED'));
+    }) 
   }
 /* getStationCategories(){
   return new Promise<any>((resolve, reject) => {
     this.snapshotChangesSubscription = this.afs.collection('States').snapshotChanges();
-    resolve(this.snapshotChangesSubscription);
+    resolve(this.snapshotChangesSubscription); 
   }
   )}
 
